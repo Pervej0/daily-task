@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import cookieParser from "cookie-parser";
-import { notFound } from "./middleware/notFound";
+import { notFound } from "./app/middleware/notFound";
 
 const app = express();
 
