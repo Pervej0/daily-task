@@ -1,7 +1,7 @@
 import { User } from "@prisma/client";
 import prisma from "../../shared/prisma";
 import bcrypt from "bcrypt";
-import config from "../../../config";
+import config from "../../config";
 
 export const createUserDB = async (payload: User) => {
   const hashPassword = await bcrypt.hash(
@@ -14,6 +14,7 @@ export const createUserDB = async (payload: User) => {
   const user = await prisma.user.create({
     data: payload,
     select: {
+      fullName: true,
       email: true,
       role: true,
       bio: true,

@@ -11,4 +11,7 @@ export default {
   SALT_ROUND: process.env.SALT_ROUND,
   REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
   REFRESH_TOKEN_EXPIRES_IN: process.env.REFRESH_TOKEN_EXPIRES_IN,
+  EMAIL: process.env.EMAIL,
+  PASSWORD: process.env.PASSWORD,
+  LOCAL_URL: process.env.LOCAL_URL,
 };
