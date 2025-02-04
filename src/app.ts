@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import { notFound } from "./app/middleware/notFound";
 import { StatusCodes } from "http-status-codes";
 import { RootRoute } from "./app/routes";
+import globalErrorHandler from "./app/middleware/GlobalErrorHandler";
 
 const app = express();
 
@@ -19,5 +20,6 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
+app.use(globalErrorHandler);
 app.use(notFound);
 export default app;

@@ -73,10 +73,11 @@ export const forgotPasswordDB = async (req: Request, res: Response) => {
 export const resetPasswordDB = async (token: string, payload: any) => {
   await prisma.user.findUniqueOrThrow({
     where: {
-      id: payload.id,
+      email: payload.email,
     },
   });
   const verifyToken = decodeToken(token, config.ACCESS_TOKEN_SECRET as Secret);
+  console.log(verifyToken);
   if (!verifyToken) {
     throw new CustomError(StatusCodes.UNAUTHORIZED, "The user is time out!");
   }
@@ -88,7 +89,7 @@ export const resetPasswordDB = async (token: string, payload: any) => {
 
   const updatePassword = await prisma.user.update({
     where: {
-      id: payload.id,
+      email: payload.email,
     },
     data: {
       password: hashPassword,
