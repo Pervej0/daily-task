@@ -1,6 +1,7 @@
 import { Server } from "http";
 import express from "express";
-const PORT = 8080;
+import config from "./config";
+const PORT = config.PORT || 8080;
 const app = express();
 
 let server: Server;
