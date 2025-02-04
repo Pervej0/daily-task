@@ -1,8 +1,7 @@
 import { Server } from "http";
-import express from "express";
 import config from "./config";
+import app from "./app";
 const PORT = config.PORT || 8080;
-const app = express();
 
 let server: Server;
 const main = async () => {
