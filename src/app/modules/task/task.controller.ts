@@ -9,13 +9,20 @@ import {
   getTasksDB,
   updateTaskDB,
 } from "./task.service";
+import { pick } from "../../shared/pick";
+import { selectedTaskQueryItems } from "./task.constant";
+import { paginationOptionItem } from "../../helper/paginationCalculator";
 
 export const getTasks: RequestHandler = asyncCatch(async (req, res) => {
-  const result = await getTasksDB();
+  const query = pick(req.query, selectedTaskQueryItems);
+  const paginationOption = pick(req.query, paginationOptionItem);
+  const result = await getTasksDB(query, paginationOption);
+
   sendResponse(res, {
     statusCode: StatusCodes.OK,
     message: "Tasks retrieved successfully!",
-    data: result,
+    meta: result.meta,
+    data: result.data,
   });
 });
 

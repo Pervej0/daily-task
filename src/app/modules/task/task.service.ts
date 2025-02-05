@@ -1,9 +1,47 @@
-import { Task } from "@prisma/client";
+import { Prisma, Task } from "@prisma/client";
 import prisma from "../../shared/prisma";
+import paginationCalculator from "../../helper/paginationCalculator";
 
-export const getTasksDB = async () => {
-  const tasks = await prisma.task.findMany({});
-  return tasks;
+export const getTasksDB = async (
+  query: Record<string, any>,
+  options: Record<string, unknown>
+) => {
+  const { page, skip, limit, sortBy, sortOrder } =
+    paginationCalculator(options);
+
+  const { ...filterData } = query;
+  const andCondition: Prisma.TaskWhereInput[] = [];
+
+  if (Object.keys(filterData).length > 0) {
+    andCondition.push({
+      AND: Object.keys(filterData).map((key) => ({
+        [key]: {
+          equals: filterData[key],
+        },
+      })),
+    });
+  }
+
+  const whereCondition: Prisma.TaskWhereInput = { AND: andCondition };
+
+  const result = await prisma.task.findMany({
+    where: whereCondition,
+    skip,
+    take: limit,
+  });
+
+  const count = await prisma.task.count({
+    where: whereCondition,
+  });
+
+  return {
+    meta: {
+      page,
+      limit,
+      total: count,
+    },
+    data: result,
+  };
 };
 
 export const getSingleTaskDB = async (id: string) => {
