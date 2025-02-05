@@ -9,6 +9,33 @@ import decodeToken from "../../helper/decodeToken";
 import sendResponse from "../../shared/sendResponse";
 import forgetEmail from "../../template/forgetEmail";
 import { Request, Response } from "express";
+import { User } from "@prisma/client";
+
+export const registerDB = async (payload: User) => {
+  const hashPassword = await bcrypt.hash(
+    payload.password,
+    Number(config.SALT_ROUND) as number
+  );
+
+  payload.password = hashPassword;
+
+  const user = await prisma.user.create({
+    data: payload,
+    select: {
+      fullName: true,
+      email: true,
+      role: true,
+      bio: true,
+      tasks: {
+        include: {
+          user: true,
+        },
+      },
+    },
+  });
+
+  return user;
+};
 
 export const loginUserDB = async (payload: {
   email: string;

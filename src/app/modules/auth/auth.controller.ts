@@ -2,7 +2,16 @@ import { RequestHandler } from "express";
 import { StatusCodes } from "http-status-codes";
 import asyncCatch from "../../shared/asyncCatch";
 import sendResponse from "../../shared/sendResponse";
-import { loginUserDB, resetPasswordDB } from "./auth.service";
+import { loginUserDB, registerDB, resetPasswordDB } from "./auth.service";
+
+export const register: RequestHandler = asyncCatch(async (req, res) => {
+  const result = await registerDB(req.body);
+  sendResponse(res, {
+    statusCode: StatusCodes.CREATED,
+    message: "User registered successfully!",
+    data: result,
+  });
+});
 
 export const loginUser: RequestHandler = asyncCatch(async (req, res) => {
   const result = await loginUserDB(req.body);
@@ -22,7 +31,7 @@ export const resetPassword: RequestHandler = asyncCatch(
 
     sendResponse(res, {
       statusCode: StatusCodes.OK,
-      message: "Password Reset Successfully!",
+      message: "Password reset successfully!",
       data: result,
     });
   }

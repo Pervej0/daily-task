@@ -16,7 +16,7 @@ app.get("/", (req: Request, res: Response) => {
   res.send({
     status: StatusCodes.OK,
     success: true,
-    message: "Welcome to Server Site",
+    message: "Welcome to The Server Site",
   });
 });
 
