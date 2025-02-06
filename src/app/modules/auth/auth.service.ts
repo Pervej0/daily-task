@@ -11,6 +11,29 @@ import forgetEmail from "../../template/forgetEmail";
 import { Request, Response } from "express";
 import { User } from "@prisma/client";
 
+export const getMyProfileDB = async (user: { email: string }) => {
+  const profile = await prisma.user.findUniqueOrThrow({
+    where: { email: user.email },
+    include: {
+      tasks: true,
+    },
+  });
+
+  return profile;
+};
+
+export const updateMyProfileDB = async (
+  user: { email: string },
+  payload: Partial<User>
+) => {
+  const profile = await prisma.user.update({
+    where: { email: user.email },
+    data: payload,
+  });
+
+  return profile;
+};
+
 export const registerDB = async (payload: User) => {
   const hashPassword = await bcrypt.hash(
     payload.password,
@@ -26,11 +49,6 @@ export const registerDB = async (payload: User) => {
       email: true,
       role: true,
       bio: true,
-      tasks: {
-        include: {
-          user: true,
-        },
-      },
     },
   });
 

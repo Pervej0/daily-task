@@ -6,8 +6,7 @@ export const getTasksDB = async (
   query: Record<string, any>,
   options: Record<string, unknown>
 ) => {
-  const { page, skip, limit, sortBy, sortOrder } =
-    paginationCalculator(options);
+  const { page, skip, limit } = paginationCalculator(options);
 
   const { ...filterData } = query;
   const andCondition: Prisma.TaskWhereInput[] = [];
