@@ -1,8 +1,8 @@
-# 📝 Daily Task Management Server
+## 📝 Daily Task Management Server
 
 This is a **Daily Task Management** server-side application that allows users to **add tasks, view tasks, filter tasks by status**, and manage their **profile and authentication securely**.
 
-## 🚀 Features
+### 🚀 Features
 
 - 🔒 **User Authentication**: Secure login and registration system.
 - ✅ **Task Management**: Users can create, view, update, and delete tasks.
@@ -12,7 +12,7 @@ This is a **Daily Task Management** server-side application that allows users to
 - 📦 **Prisma ORM**: Database management using Prisma.
 - 🏗 **Scalable Codebase**: Built with TypeScript for maintainability.
 
-## 🛠️ Tech Stack
+### 🛠️ Tech Stack
 
 - **Node.js** + **Express.js** - Backend framework
 - **TypeScript** - Strongly typed JavaScript
@@ -21,7 +21,7 @@ This is a **Daily Task Management** server-side application that allows users to
 - **JWT Authentication** - Secure authentication
 - **Zod** - Request validation
 
-## 🏗 Installation & Setup
+### 🏗 Installation & Setup
 
 ### 1️⃣ Clone the repository
 
@@ -30,7 +30,7 @@ git clone https://github.com/Pervej0/daily-task
 cd daily-task
 ```
 
-## Start Project
+### Start Project
 
 ```sh
 npm install
@@ -41,14 +41,14 @@ npm run dev
 npm run build
 ```
 
-## 🔥 API Endpoints
+### 🔥 API Endpoints
 
-### Authentication
+#### Authentication
 
 - **POST** `/api/auth/register` - Register a new user
 - **POST** `/api/auth/login` - Log in user
 
-### Tasks
+#### Tasks
 
 - **POST** `/api/tasks` - Create a new task
 - **GET** `/api/tasks` - Get all tasks (filter by status)
@@ -56,7 +56,7 @@ npm run build
 - **PUT** `/api/tasks/:id` - Update a task
 - **DELETE** `/api/tasks/:id` - Delete a task
 
-### User Profile
+#### User Profile
 
 - **GET** `/api/user/profile` - Get user profile
 - **PUT** `/api/user/profile` - Update user profile
