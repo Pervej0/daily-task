@@ -43,15 +43,20 @@ npm run build
 
 ## 🔥 API Endpoints
 
-Authentication
-POST /api/auth/register - Register a new user
-POST /api/auth/login - Log in user
-Tasks
-POST /api/tasks - Create a new task
-GET /api/tasks - Get all tasks (filter by status)
-GET /api/tasks/:id - Get a specific task
-PUT /api/tasks/:id - Update a task
-DELETE /api/tasks/:id - Delete a task
-User Profile
-GET /api/user/profile - Get user profile
-PUT /api/user/profile - Update user profile
+### Authentication
+
+- **POST** `/api/auth/register` - Register a new user
+- **POST** `/api/auth/login` - Log in user
+
+### Tasks
+
+- **POST** `/api/tasks` - Create a new task
+- **GET** `/api/tasks` - Get all tasks (filter by status)
+- **GET** `/api/tasks/:id` - Get a specific task
+- **PUT** `/api/tasks/:id` - Update a task
+- **DELETE** `/api/tasks/:id` - Delete a task
+
+### User Profile
+
+- **GET** `/api/user/profile` - Get user profile
+- **PUT** `/api/user/profile` - Update user profile
