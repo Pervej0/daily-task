@@ -8,17 +8,27 @@ import {
 } from "./auth.controller";
 import { forgotPasswordDB } from "./auth.service";
 import auth from "../../middleware/auth";
+import validationChecker from "../../middleware/validationChecker";
+import {
+  updateUserValidationSchema,
+  userValidationSchema,
+} from "./profile.validation";
 
 const router = express.Router();
 
 // user profile
 router.get("/profile", auth(), getMyProfile);
-router.put("/profile", auth(), updateMyProfile);
+router.put(
+  "/profile",
+  validationChecker(updateUserValidationSchema),
+  auth(),
+  updateMyProfile
+);
 
 // authentication
-router.post("/register", register);
+router.post("/register", validationChecker(userValidationSchema), register);
 router.post("/login", loginUser);
 router.put("/forgot-password", forgotPasswordDB);
-router.put("/reset-password", auth(), resetPassword);
+router.put("/reset-password", resetPassword);
 
 export const authRoutes = router;

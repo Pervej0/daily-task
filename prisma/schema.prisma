@@ -14,12 +14,12 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
-  email    String @unique
+  id       String  @id @default(uuid())
+  email    String  @unique
   password String
   fullName String
-  role     String @default("user")
-  bio      String
+  role     String  @default("user")
+  bio      String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

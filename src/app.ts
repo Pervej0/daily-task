@@ -3,10 +3,12 @@ import cookieParser from "cookie-parser";
 import { notFound } from "./app/middleware/notFound";
 import { StatusCodes } from "http-status-codes";
 import { RootRoute } from "./app/routes";
+import cors from "cors";
 import globalErrorHandler from "./app/middleware/GlobalErrorHandler";
 
 const app = express();
 
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 

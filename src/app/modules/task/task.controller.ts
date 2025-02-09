@@ -13,7 +13,7 @@ import { pick } from "../../shared/pick";
 import { selectedTaskQueryItems } from "./task.constant";
 import { paginationOptionItem } from "../../helper/paginationCalculator";
 
-export const getTasks: RequestHandler = asyncCatch(async (req, res) => {
+export const getTasks: RequestHandler = asyncCatch(async (req: any, res) => {
   const query = pick(req.query, selectedTaskQueryItems);
   const paginationOption = pick(req.query, paginationOptionItem);
   const result = await getTasksDB(query, paginationOption);
@@ -39,7 +39,7 @@ export const createTask: RequestHandler = asyncCatch(async (req: any, res) => {
   const result = await createTaskDB(req.body, req.user);
   sendResponse(res, {
     statusCode: StatusCodes.CREATED,
-    message: "User Created Successfully!",
+    message: "Task Created Successfully!",
     data: result,
   });
 });

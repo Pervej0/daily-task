@@ -18,7 +18,7 @@ const handleValidationError = (error: ZodError): TCustomSimplifiedError => {
   const statusCode = StatusCodes.BAD_REQUEST;
   return {
     statusCode,
-    message: zodMessage || "Validation error occur!",
+    message: "Validation error occur!",
     errorDetails,
   };
 };

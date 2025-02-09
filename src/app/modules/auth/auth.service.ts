@@ -44,12 +44,6 @@ export const registerDB = async (payload: User) => {
 
   const user = await prisma.user.create({
     data: payload,
-    select: {
-      fullName: true,
-      email: true,
-      role: true,
-      bio: true,
-    },
   });
 
   return user;
@@ -88,6 +82,7 @@ export const loginUserDB = async (payload: {
 
 export const forgotPasswordDB = async (req: Request, res: Response) => {
   const { email } = req.body;
+  console.log(req.body, req);
   const getUser = await prisma.user.findUniqueOrThrow({
     where: {
       email,
@@ -102,7 +97,7 @@ export const forgotPasswordDB = async (req: Request, res: Response) => {
     "5m"
   );
 
-  const resetLink = `${config.LOCAL_URL}/reset-password?userId=${getUser.id}&&token=${passwordResetToken}`;
+  const resetLink = `${config.LOCAL_URL}/auth/reset-password?userId=${getUser.id}&&token=${passwordResetToken}`;
 
   const info = await forgetEmail(getUser.email, resetLink);
 
@@ -116,9 +111,10 @@ export const forgotPasswordDB = async (req: Request, res: Response) => {
 };
 
 export const resetPasswordDB = async (token: string, payload: any) => {
+  console.log(token, payload, "XXX");
   await prisma.user.findUniqueOrThrow({
     where: {
-      email: payload.email,
+      id: payload.id,
     },
   });
   const verifyToken = decodeToken(token, config.ACCESS_TOKEN_SECRET as Secret);
@@ -134,7 +130,7 @@ export const resetPasswordDB = async (token: string, payload: any) => {
 
   const updatePassword = await prisma.user.update({
     where: {
-      email: payload.email,
+      id: payload.id,
     },
     data: {
       password: hashPassword,
