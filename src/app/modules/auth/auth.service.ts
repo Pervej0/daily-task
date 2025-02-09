@@ -24,7 +24,7 @@ export const getMyProfileDB = async (user: { email: string }) => {
 
 export const updateMyProfileDB = async (
   user: { email: string },
-  payload: Partial<User>
+  payload: any
 ) => {
   const profile = await prisma.user.update({
     where: { email: user.email },
